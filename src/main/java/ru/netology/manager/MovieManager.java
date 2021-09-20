@@ -18,7 +18,8 @@ public class MovieManager {
     }
 
     public void addMovie(Movie film) {
-        if (movies == null) {
+        if (movies == null)
+        {
             movies = new Movie[1];
             movies[0] = film;
         } else {
@@ -36,20 +37,20 @@ public class MovieManager {
             return null;
         }
 
-        int actualLimit;
+        int resultLength;
         if (movies.length >= feedLimit) {
-            actualLimit = feedLimit;
+            resultLength = feedLimit;
         } else {
-            actualLimit = movies.length;
+            resultLength = movies.length;
         }
 
-        Movie[] res = new Movie[actualLimit];
+        Movie[] result = new Movie[resultLength];
 
-        for(int i = 0; i < actualLimit; i++) {
-            res[i] = movies[movies.length - 1 - i];
+        for(int i = 0; i < resultLength; i++) {
+            result[i] = movies[movies.length - 1 - i];
         }
 
-        return res;
+        return result;
     }
 }
 
