@@ -8,35 +8,27 @@ public class MovieManager {
     private int feedLimit;
 
     public MovieManager() {
-        movies = null;
+        movies = new Movie[0];
         feedLimit = 10;
     }
 
     public MovieManager(int feedLimit) {
-        movies = null;
+        movies = new Movie[0];
         this.feedLimit = feedLimit;
     }
 
     public void addMovie(Movie film) {
-        if (movies == null)
-        {
-            movies = new Movie[1];
-            movies[0] = film;
-        } else {
-            Movie[] tmp = new Movie[movies.length + 1];
-            for (int i = 0; i < movies.length; i++) {
-                tmp[i] = movies[i];
-            }
-            tmp[tmp.length - 1] = film;
-            movies = tmp;
+
+        Movie[] tmp = new Movie[movies.length + 1];
+        for (int i = 0; i < movies.length; i++) {
+            tmp[i] = movies[i];
         }
+        tmp[tmp.length - 1] = film;
+        movies = tmp;
     }
 
-    public Movie[] getFeed() {
-        if (movies == null) {
-            return null;
-        }
 
+    public Movie[] getFeed() {
         int resultLength;
         if (movies.length >= feedLimit) {
             resultLength = feedLimit;
@@ -46,7 +38,7 @@ public class MovieManager {
 
         Movie[] result = new Movie[resultLength];
 
-        for(int i = 0; i < resultLength; i++) {
+        for (int i = 0; i < resultLength; i++) {
             result[i] = movies[movies.length - 1 - i];
         }
 

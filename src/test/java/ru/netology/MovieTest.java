@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Movie;
 import ru.netology.manager.MovieManager;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MovieTest {
@@ -19,17 +21,22 @@ public class MovieTest {
         movies[4] = new Movie("Invisible Man", "horrors");
         movies[5] = new Movie("trolls world tour", "cartoon");
         movies[6] = new Movie("Number One", "comedy");
-        //вызываем менеджера с конструктором без параметра
+        //вызываем конструктор без параметра
         MovieManager manager;
         manager = new MovieManager();
-        //добавление каждого фильма в менеджер
-        for (Movie m: movies) {
-            manager.addMovie(m);
+        //добавление каждого фильма в менеджер без параметра
+
+        for (int i = movies.length - 1; i >= 0; i--) {
+            manager.addMovie(movies[i]);
         }
+
         Movie[] feed;
         feed = manager.getFeed();
-        assertEquals(7, feed.length);
-        }
+
+        assertEquals(true, Arrays.equals(feed, movies));
+
+    }
+
     @Test
     public void shouldCreateDefaultManagerAnd5Movies() {
         Movie[] movies;
@@ -46,12 +53,13 @@ public class MovieTest {
         manager = new MovieManager(5);
         //добавление каждого фильма в менеджер
         for (Movie m: movies) {
-            manager.addMovie(m);
+            manager.addMovie( m);
         }
         Movie[] feed;
         feed = manager.getFeed();
         assertEquals(5, feed.length);
     }
+
     @Test
     public void CreateBlankFeed() {
         MovieManager manager;
