@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import ru.netology.domain.Movie;
 import ru.netology.manager.MovieManager;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MovieTest {
@@ -32,9 +30,7 @@ public class MovieTest {
 
         Movie[] feed;
         feed = manager.getFeed();
-
-        assertEquals(true, Arrays.equals(feed, movies));
-
+        assertArrayEquals(movies, feed);
     }
 
     @Test
@@ -48,16 +44,24 @@ public class MovieTest {
         movies[4] = new Movie("Invisible Man", "horrors");
         movies[5] = new Movie("trolls world tour", "cartoon");
         movies[6] = new Movie("Number One", "comedy");
-        //вызываем менеджера с конструктором без параметра
+        //вызываем конструктор менеджера с параметром
         MovieManager manager;
         manager = new MovieManager(5);
         //добавление каждого фильма в менеджер
-        for (Movie m: movies) {
-            manager.addMovie( m);
+        for (Movie m : movies) {
+            manager.addMovie(m);
         }
+
         Movie[] feed;
         feed = manager.getFeed();
-        assertEquals(5, feed.length);
+
+        Movie[] check;
+        check = new Movie[5];
+        for (int i = movies.length - 1; i >= 2; i--) {
+            check[6 - i] = movies[i];
+        }
+
+        assertArrayEquals(check, feed);
     }
 
     @Test
@@ -66,8 +70,6 @@ public class MovieTest {
         manager = new MovieManager();
         Movie[] feed;
         feed = manager.getFeed();
-
     }
-
-
 }
+
